@@ -27,6 +27,8 @@ jobs:
         run: |
           set +e
           echo ::set-output name=release::$(autopub check)
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
       - name: Prepare pre-release version
         if: steps.check_release.outputs.release == ''
         run: |
