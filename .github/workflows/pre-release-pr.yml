@@ -30,6 +30,7 @@ jobs:
       - name: Prepare pre-release version
         if: steps.check_release.outputs.release == ''
         run: |
+          git rev-parse HEAD
           autopub prepare
           poetry version prerelease
           poetry version
