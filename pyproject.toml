@@ -3,6 +3,7 @@ name = "autodeploy-tests"
 version = "1.0.0"
 description = ""
 authors = ["Marco Acierno <marcoaciernoemail@gmail.com>"]
+packages = [ { include = "autodeploy-tests" } ]
 
 [tool.poetry.dependencies]
 python = "^3.6"
