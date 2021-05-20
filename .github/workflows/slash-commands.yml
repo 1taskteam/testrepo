@@ -12,5 +12,7 @@ jobs:
         uses: peter-evans/slash-command-dispatch@v2
         with:
           token: ${{ secrets.BOT_TOKEN }}
+          reaction-token: ${{ secrets.BOT_TOKEN }}
+          permission: admin
           commands: |
             pre-release
