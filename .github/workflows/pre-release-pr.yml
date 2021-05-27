@@ -33,7 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
           autopub prepare
-          poetry version $(poetry version -s)-dev.$(date '+%s')+$(git rev-parse HEAD)
+          poetry version $(poetry version -s)-dev.$(date '+%s')
           poetry build
           poetry publish --username __token__ --password ${{ secrets.PYPI_TOKEN }}
       - name: Find Release Comment
