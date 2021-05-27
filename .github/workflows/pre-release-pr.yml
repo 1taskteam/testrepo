@@ -44,23 +44,10 @@ jobs:
           issue-number: ${{ github.event.client_payload.pr_number }}
           repository: 1taskteam/${{ github.event.client_payload.repository }}
           comment-author: marcottebear
-      - name: Create comment
+      - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v1
-        if: ${{ steps.find_comment.outputs.comment-id == null }}
         with:
-          token: ${{ secrets.BOT_TOKEN }}
-          issue-number: ${{ github.event.client_payload.pr_number }}
-          repository: 1taskteam/${{ github.event.client_payload.repository }}
-          body: |
-            Library released
-      - name: Update comment
-        uses: peter-evans/create-or-update-comment@v1
-        if: ${{ steps.find_comment.outputs.comment-id != null }}
-        with:
-          token: ${{ secrets.BOT_TOKEN }}
-          issue-number: ${{ github.event.number }}
-          edit-mode: replace
           comment-id: ${{ steps.find_comment.outputs.comment-id }}
-          repository: 1taskteam/${{ github.event.client_payload.repository }}
-          body: |
-            Library released!!
+          issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
+          body: Reeeeees
+          edit-mode: replace
