@@ -39,6 +39,7 @@ jobs:
           poetry publish --username __token__ --password ${{ secrets.PYPI_TOKEN }}
 
           echo "::set-output name=version::$(poetry version -s)"
+          echo "::set-output name=commit::$(git rev-parse HEAD)"
       - name: Find Release Comment
         uses: peter-evans/find-comment@v1
         id: find_comment
@@ -59,9 +60,10 @@ jobs:
 
             :wave:
 
-            Version ${{ steps.release.outputs.version }} has been published to PyPi!
+            Version *${{ steps.release.outputs.version }}* [${{ steps.release.outputs.commit }}]
+            has been releases on PyPi! :rocket:
 
-            You can install it by doing:
+            You can try it by doing:
 
             ```shell
             poetry add strawberry-graphql==${{ steps.release.outputs.version }}
