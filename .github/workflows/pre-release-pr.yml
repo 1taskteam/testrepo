@@ -42,13 +42,11 @@ jobs:
         with:
           token: ${{ secrets.BOT_TOKEN }}
           issue-number: ${{ github.event.client_payload.pr_number }}
-          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
           comment-author: marcottebear
       - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v1
         with:
           token: ${{ secrets.BOT_TOKEN }}
-          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
           comment-id: ${{ steps.find_comment.outputs.comment-id }}
           issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
           body: Reeeeees
