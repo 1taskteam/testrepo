@@ -32,7 +32,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
-          git rev-parse HEAD
           autopub prepare
-          poetry version prerelease
+          poetry version $(poetry version -s)-dev.$(date '+%s')+$(git rev-parse HEAD)
           poetry version
