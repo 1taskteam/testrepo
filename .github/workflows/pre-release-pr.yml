@@ -34,4 +34,5 @@ jobs:
         run: |
           autopub prepare
           poetry version $(poetry version -s)-dev.$(date '+%s')+$(git rev-parse HEAD)
-          poetry version
+          poetry build
+          poetry publish --username __token__ --password ${{ secrets.PYPI_TOKEN }}
