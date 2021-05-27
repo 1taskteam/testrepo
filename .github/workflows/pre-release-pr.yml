@@ -36,3 +36,31 @@ jobs:
           poetry version $(poetry version -s)-dev.$(date '+%s')+$(git rev-parse HEAD)
           poetry build
           poetry publish --username __token__ --password ${{ secrets.PYPI_TOKEN }}
+      - name: Find Release Comment
+        uses: peter-evans/find-comment@v1
+        id: find_comment
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          issue-number: ${{ github.event.client_payload.pr_number }}
+          repository: 1taskteam/${{ github.event.client_payload.repository }}
+          comment-author: marcottebear
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v1
+        if: ${{ steps.find_comment.outputs.comment-id == null }}
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          issue-number: ${{ github.event.client_payload.pr_number }}
+          repository: 1taskteam/${{ github.event.client_payload.repository }}
+          body: |
+            Library released
+      - name: Update comment
+        uses: peter-evans/create-or-update-comment@v1
+        if: ${{ steps.find_comment.outputs.comment-id != null }}
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          issue-number: ${{ github.event.number }}
+          edit-mode: replace
+          comment-id: ${{ steps.find_comment.outputs.comment-id }}
+          repository: 1taskteam/${{ github.event.client_payload.repository }}
+          body: |
+            Library released!!
