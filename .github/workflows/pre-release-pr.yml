@@ -77,8 +77,7 @@ jobs:
 
             :wave:
 
-            Version **${{ steps.release.outputs.version }}** [${{ steps.release.metadata.commit }}]
-            has been released on PyPi! :rocket:
+            Pre-release **${{ steps.release.outputs.version }}** [${{ steps.metadata.outputs.commit }}] has been released on PyPi! :rocket:
 
             You can try it by doing:
 
