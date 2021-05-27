@@ -61,7 +61,7 @@ jobs:
             :wave:
 
             Version *${{ steps.release.outputs.version }}* [${{ steps.release.outputs.commit }}]
-            has been releases on PyPi! :rocket:
+            has been released on PyPi! :rocket:
 
             You can try it by doing:
 
