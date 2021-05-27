@@ -41,7 +41,7 @@ jobs:
         id: find_comment
         with:
           token: ${{ secrets.BOT_TOKEN }}
-          issue-number: ${{ github.event.client_payload.pr_number }}
+          issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
           body-includes: "Pre-release:"
       - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v1
